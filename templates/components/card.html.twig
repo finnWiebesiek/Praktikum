@@ -1,0 +1,74 @@
+
+{% block style %}
+    <style>
+        .card-content 
+        {
+            color: rgb(var(--color-primary-lighter));
+        }
+        
+        .hex-top 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-content--icon 
+        {
+            background-size:100%;
+            min-height: 70px;
+            width: 77px;
+            margin-bottom: -125px;
+            flex-shrink: 0;
+            color: rgb(var(--color-primary-lighter));
+        }
+
+        .hex-middle
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+        }
+
+        .hex-middle h3
+        {
+            
+            margin-bottom: 10px;
+        }
+
+        .hex-middle p{
+            color: rgb(var(--color-primary-normal));
+
+        }
+
+        .inhalt 
+        {
+            width: 70%;
+            position:relative; top: 35px;
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+
+
+    
+    <div class="hex">
+        <div class="hex-top">
+            <img class="card-content--icon" src="{{ asset(item.icon) }}"></img> 
+        </div>
+        <div class="hex-middle">
+            <div class="inhalt">
+            <center>
+                <h3>{{ item.headline }}</h3>
+                <p>{{item.content}}</p>
+            </center>
+            </div>
+        </div>
+        <div class="hex-bottom">
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
+{% block style %}
+    <style>
+        .experience-content {
+            display: flex;
+            grid-gap: 32px;
+        }
+
+        .experience-content-img {
+            aspect-ratio: 4/3;
+            width: 416px;
+        }
+
+        .experience-content-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiene-content-link{
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+        }
+
+        .experiene-content-link a{
+           color: rgb(var(--color-primary-light));
+           text-decoration-line: underline;
+        }
+
+        .experiene-content-link a:hover 
+        {
+            color: rgb(var(--color-primary-dark));
+        }
+
+        @media screen and (max-width: 650px) {
+            .experience-content {
+                flex-direction: column;
+            }
+
+            .experience-content-img {
+                aspect-ratio: 2/1;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="experience-content">
+        <img class="experience-content-img" src="{{asset(item.img)}}"/>
+
+        <span class="experience-content-text">
+            <h3>{{item.headline}}</h3>
+            <p>{{item.content}}</p>
+            {% if item.link is defined %}
+                <div class="experiene-content-link">
+                <a href="{{item.link}}">{{item.linkText}}</a>
+                </div>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

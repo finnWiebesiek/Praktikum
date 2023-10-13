@@ -1,0 +1,51 @@
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
+{% block style %}
+    <style>
+        .experience {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 40px;
+        }
+
+        .experience-element {
+            max-width: 1024px;
+            display: grid;
+            grid-gap: 32px;
+        }
+
+        @media screen and (max-width: 1020px){
+            .experience {
+                padding: 32px;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+        {% set experiences = [
+            {
+            'headline': 'Praktikum - Webdesign',
+            'content': '2023 habe ich in einer Werbe Agentur mein 2-wöchiges Praktikum im Bereich Webdesign abgeschlossen.',
+            'link': 'https://www.hdnet.de/',
+            'linkText': 'zur Website von HDNET',
+            'img': 'img/code.png'},
+            {
+            'headline': 'Teilnahme - macht mathe',
+            'content': 'Im Dezember 2022 haben drei Klassenkammeraden und ich, am macht mathe Wetbewerb teilgenommen. Bei diesem konnte ich meine Fähigeiten im bereich Logisches denken und Mathematik gut in unsere gruppen Arbeit einbringen. ',
+            'link': 'https://gym-pw.de/erfolgreiche-teilnahme-macht-mathe-2022-23/',
+            'linkText': 'zum Artikel meiner Schule',
+            'img': 'img/machtMathe2.jpg' 
+            },
+
+        ] %}
+    <section id="experience" class="experience">
+        <div class="experience-element">
+            <h2>Erfahrungen</h2>
+            {% for item in experiences %}
+                {% include 'components/experience/experience-content.html.twig' %}
+            {% endfor %}</div>
+    </section>
+{% endblock %}

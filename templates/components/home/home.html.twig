@@ -1,0 +1,104 @@
+{% block style %}
+    <style>
+        .home {
+        
+            
+            height: 100vh;
+            background-image:url({{ asset('img/Finn.jpg')}});
+            background-position: -550px -140px;
+            background-size: 150%;
+            
+           display: flex;
+           flex-flow: column nowrap; 
+           justify-content:space-between;
+           align-items: center;
+        }
+
+        .home-element {
+        
+        }
+
+        .element--text {
+
+        }
+
+        .social-media {
+           
+           
+        }
+
+        .social-media--a {
+
+        }
+
+        .download {
+            font-size: 30px;
+        }
+
+        @media screen and (max-width: 1020px) {
+            .site-content {
+
+            }
+            .home{
+            background-position: -350px -100px;
+
+            }
+            .social-media {
+            
+        }
+
+        }
+        @media screen and (max-width: 1360px) {
+            .site-content {
+             
+            }
+            .home{
+            background-position: -400px -100px;
+
+
+            
+        }
+        }
+        @media screen and (max-width: 1800px) {
+            .site-content {
+
+            }
+            .home{
+                background-position: -400px -90px;
+
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section id="home" class="home">
+        
+            
+            <div class="name">
+            
+          
+                <center>
+                <h1 class="bold color-primary-normal"><br>Finn <br> Wiebesiek</h1>
+                </center>
+            </div>
+             
+            <div class="social-media">
+            
+             
+            
+            <div> 
+            {% if showDownloadButton %}
+                <a href="{{ path('downloadCv', {'hash': hash}) }}" target="_blank"><button type="button" class="download btn btn-primary bold">Bewerbung herunterladen</button></a>
+            {% endif %}
+             <center>
+             <a href="https://www.instagram.com/finn.wbs/?hl=de"><p> Instagram</p> </a>
+             </center>
+             
+             
+
+             </div>
+        
+
+    </section>
+{% endblock %}

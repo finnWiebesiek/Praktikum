@@ -1,0 +1,151 @@
+{% block style %}
+    <style>
+    
+        .hobby {
+           background-color: rgb(var(--color-primary-lighter));
+            
+            
+        }
+
+        .hobby-element{
+            background-color: rgb(var(--color-primary-lighter));
+            display: flex;
+           
+            position:relative;
+            padding: 50px 0;
+            
+            justify-content:  space-evenly; 
+        }
+        .hobby-cards{
+            
+            display: flex;
+            width: 66%;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            
+            
+            padding: 0;
+            list-style: none;
+        }
+        .hobby-text{
+            position: relative;
+            right: 20px;
+            width: 25%;
+        }
+        .hobby-text h2{
+         color: rgb(var(--color-primary-normal));
+        }
+        .hobby-text p{
+            color: rgb(var(--color-primary-darker))
+        }
+        .hex{
+                
+                
+                margin-bottom: 35px;
+            }
+
+        @media screen and (max-width: 1020px) {
+            .hobby {
+            height: 100%;
+            }
+
+            .hobby-element
+            {
+                display: flex;
+                justify-content:  space-evenly; 
+            }
+
+            .hobby-cards 
+            {
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: space-around;
+                align-content: center;
+                gap: 25px;
+                margin-right: 50px;
+                margin-top: 20px;
+                padding: 0;
+                list-style: none;
+            }
+            
+            .hobby-text
+            {
+                margin-top: 20px;
+                position: relative;
+                right: 30px;
+                width: 30%;
+            }
+
+            .hex
+            {
+                margin-bottom: 50px;
+            }
+
+        }
+
+        @media screen and (max-width: 650px){
+            .hobby 
+            {
+           
+            }
+
+            .hex{
+                margin-bottom: 100px;
+            }
+
+            .hobby-cards 
+            {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-item: center;
+                margin-bottom: 100px;
+                padding: 60px;
+                list-style: none;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% set hobbies = [
+        {
+            'icon': 'svg/code.svg',
+            'headline': 'Technik',
+            'content': 'Ich repariere wenn ich kapute technik habe diese gerne selber und habe mir 2022 meinen eigenen Computer zusammen gebaut.',
+        },
+        {
+            'icon': 'svg/computer.svg',
+            'headline': 'Video Spiele',
+            'content': 'Ich spiele am liebsten Multiplayer, Stratiegie und Taktik games mit meinen Freunden.',
+        },
+        {
+            'icon': 'svg/football-ball.svg',
+            'headline': 'Fußball',
+            'content': 'In meiner Freizeit spiele ich im Ferein Fußball dabei macht mir besonders das spielem im Team spaß.  ',
+        },
+
+    ] %}
+ 
+    <div id="hobby" class="hobby">
+        <div class="hobby-element">
+            <div class="hobby-cards">
+                {% for item in hobbies %}
+                    {% include 'components/card.html.twig' with item %}
+                {% endfor %}
+            </div>
+            <div class="hobby-text">
+            <h2>INTERESSEN <br> </h2>
+            <p>
+            Mein Name ist  Finn Wiebesiek. <br> Ich bin 17 Jahre alt und besuche <br> derzeit das Städtische <br> Gymnasium in Porta Westfalica.<br> <br>
+
+Meine Interessen liegen im <br> Informationtechnischen <br> und Mathematischen Bereich. Ich spiele Fußball und verbringe gerne Zeit mit meinen Freunden.<br> <br>
+
+Meine Abitur Fächer sind Mathe, Inflormatik, Englisch und Geschichte. Wobei ich Englisch und Mathe als Leistungs Kurse belge. 
+            </p>
+            </div>
+        </div>
+       
+
+    </div>
+{% endblock %}

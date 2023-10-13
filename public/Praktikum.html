@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Praktikum</title>
+        <link rel="stylesheet" href="Praktikum_files/style.css">
+
+            <script>
+        function onNav() {
+            var element = document.getElementById("toggle");
+            element.classList.toggle("toggle--on");
+
+            var navigation = document.getElementById("menu-holder");
+            navigation.classList.toggle("toggle--on");
+        }
+    </script>
+
+            <script>
+        window.addEventListener('load', () => {
+            const inputs = document.getElementById('form').getElementsByClassName('form-control');
+            for (let input of inputs) {
+                const eventHandler = (event) => {
+                    const label = event.target.parentNode.querySelector('label');
+                    if ('' !== event.target.value && label.classList.contains('form-group-label-focus')) {
+                        return;
+                    }
+                    label.classList.toggle('form-group-label-focus');
+                };
+
+                input.addEventListener('focusin', eventHandler);
+                input.addEventListener('focusout', eventHandler);
+
+                if ('' !== input.value) {
+                    input.dispatchEvent(new Event('focusout'))
+                }
+            }
+        })
+    </script>
+
+
+        <script>
+        window.addEventListener('load', () => {
+            let observer = new IntersectionObserver(entries => {
+                for (const entry of entries) {
+                    if (true === entry.isIntersecting) {
+                        const percentage = entry.target.dataset.percentage;
+                        entry.target.style.width = percentage + '%';
+                    }
+                }
+            },{ threshold: [0.3] })
+            const elements = [...document.getElementsByClassName('js-ProgressBarTop')]
+            elements.forEach(item => {
+                observer.observe(item)
+            })
+        })
+    </script>
+
+        <style>
+        #content {
+            margin-left: 380px;
+            width: calc(100% - 380px);
+        }
+
+        @media screen and (max-width: 1599px){
+            #content {
+            margin-left: 320px;
+            width: calc(100% - 320px);
+            }
+        }
+
+        @media screen and (max-width: 1360px){
+            #content {
+                margin-left: 90px;
+                width: calc(100% - 90px);
+            }
+        }
+
+        @media screen and (max-width: 1020px) {
+            #content {
+                margin-left: 0px;
+                width: 100%;
+            }
+        }
+
+    </style>
+
+        <style>
+        .nav-points {
+            color: rgb(var(--color-primary-lighter));
+            padding: 5px 0;
+            font-size: 28px;
+            line-height: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .nav-points:hover{
+            color: rgb(var(--color-primary-normal));
+        }
+
+
+        .header-holder {
+            position: fixed;
+            background: rgb(var(--color-primary-darker));
+            width: 380px;
+            height: 100vh;
+            z-index: 1;
+            top:0;
+        }
+
+        .toggle-holder {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 3;
+        }
+
+        #toggle {
+            height: 32px;
+            width: 30px;
+            position: relative;
+        }
+
+        #toggle:before {
+            transform: translate3d(0,-8px,0px);
+            width: 21px;
+            margin-left: 0;
+            content: '';
+            height: 3px;
+            position: absolute;
+            transform-origin: 50% 50%;
+            transition: all .25s;
+            top:8px;
+            background: rgb(var(--color-primary-lighter));
+        }
+        #toggle:after {
+            transform: translate3d(0,8px,0px);
+            width: 30px;
+            margin-left: 0;
+            content: '';
+            height: 3px;
+            position: absolute;
+            transform-origin: 50% 50%;
+            top:8px;
+            background: rgb(var(--color-primary-lighter));
+        }
+
+        #toggle .menu-line {
+            width: 13px;
+            height: 3px;
+            position: absolute;
+            transition: all .25s;
+            margin-left: 0;
+            top: 8px;
+            background-color: rgb(var(--color-primary-lighter));
+        }
+
+        #toggle.toggle--on .menu-line{
+            opacity: 0;
+        }
+
+        #toggle.toggle--on:before {
+            transform: rotate3d(0,0,1,
+            45deg) translate3d(0,0,0);
+            background-color: rgb(var(--color-primary-lighter));
+            margin-left: 0;
+            width: 26px;
+        }
+
+        #toggle.toggle--on:after {
+            transform: rotate3d(0,0,1,
+            -45deg);
+            background-color: rgb(var(--color-primary-lighter));
+            width: 26px;
+        }
+        #menu-holder {
+            background-color: rgb(var(--color-primary-light));
+            width: 380px;
+            height: 100%;
+            min-height: 100vh;
+            top: 0;
+            left: 0;
+            position: absolute;
+            transform: translateX(-400px);
+            transition: transform .3s linear;
+            z-index: 1;
+            overflow: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        #menu-holder.toggle--on {
+            transform: translateX(0);
+        }
+
+        .menu-holder--points {
+            width: fit-content;
+            height: fit-content;
+            padding-left: 75px;
+        }
+
+        .menu-item {
+            list-style: none;
+        }
+        .menu-item:not(:first-child) {
+            margin-top: 24px;
+        }
+
+        @media screen and (max-width: 1599px){
+            .header-holder {
+                width: 320px;
+            }
+
+            #menu-holder {
+                width: 320px;
+                transform: translateX(-320px);
+            }
+        }
+        @media screen and (max-width: 1360px){
+            .header-holder {
+                width: 90px;
+            }
+        }
+        @media screen and (max-width: 1020px){
+            .header-holder {
+                height: 55px;
+                width: 100%;
+                z-index: 2;
+            }
+
+            .toggle-holder {
+                top: 15px;
+                left: 15px;
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            #menu-holder {
+                width: 100%;
+                transform: translateX(-100%);
+                overflow: auto;
+            }
+        }
+    </style>
+
+        <style>
+        .home {
+        
+            
+            height: 100vh;
+            background-image:url(/img/Finn.jpg);
+            background-position: -500px -140px;
+            background-size: 150%;
+            
+           display: flex;
+           flex-flow: column nowrap; 
+           justify-content:space-between;
+           align-items: center;
+        }
+
+        .home-element {
+        
+        }
+
+        .element--text {
+
+        }
+
+        .social-media {
+           
+           
+        }
+
+        .social-media--a {
+
+        }
+
+        .download {
+
+        }
+
+        @media screen and (max-width: 1020px) {
+            .site-content {
+
+            }
+            .home{
+            
+
+            }
+            .social-media {
+            
+        }
+
+        }
+        @media screen and (max-width: 1360px) {
+            .site-content {
+             
+            }
+            .home{
+            
+
+            
+        }
+        }
+        @media screen and (max-width: 1800px) {
+            .site-content {
+
+            }
+            .home{
+           
+        
+
+            }
+        }
+    </style>
+
+        <style>
+        .hobby {
+           
+            height: 100vh;
+            background-color: rgb(var(--color-primary-lighter));   
+
+        }
+
+        .hobby-element{
+            display: flex;
+           
+            position:relative;
+            top: 7%;
+            justify-content:  space-between; 
+        }
+        .hobby-cards{
+            
+            display: flex;
+            width: 50%;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin-bottom:-15px;
+            
+            padding: 0;
+            list-style: none;
+        }
+        .hobby-text{
+            position: relative;
+            right: 20px;
+            width: 25%;
+        }
+        .hobby-text h2{
+         color: rgb(var(--color-primary-normal));
+        }
+        .hobby-text p{
+            color: rgb(var(--color-primary-darker))
+        }
+
+        @media screen and (max-width: 1020px) {
+            .hobby {
+            height: 100%;
+            }
+
+            .hobby-element{
+                display: flex;
+           
+        
+                justify-content:  space-evenly; 
+            }
+
+            .hobby-cards 
+            {
+            display: flex;
+           
+            width: 30%;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-content: center;
+            margin-right: 50px;
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+            }
+            .hobby-text{
+                margin-top: 20px;
+                position: relative;
+                right: 30px;
+                width: 30%;
+            }
+            .hex{
+                
+                margin-bottom: 50px;
+            }
+        }
+
+        @media screen and (max-width: 650px){
+            .hobby {
+            height: 80%;
+            }
+
+            .hex{
+                margin-bottom: 50px;
+            }
+
+            .hobby-cards 
+            {
+            display: flex;
+           
+            width: 40%;
+            flex-flow: column wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 100px;
+            padding: 60px;
+            list-style: none;
+            }
+        }
+    </style>
+
+        <style>
+        .experience {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 40px;
+        }
+
+        .experience-element {
+            max-width: 1024px;
+            display: grid;
+            grid-gap: 32px;
+        }
+
+        @media screen and (max-width: 1020px){
+            .experience {
+                padding: 32px;
+            }
+        }
+    </style>
+
+        <style>
+        .career {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 80px;
+        }
+
+        ul.career-element {
+            max-width: 1024px;
+            margin: 0;
+            padding: 0 0 0 64px;
+            -webkit-transform: translateZ(0);
+        }
+
+        @media screen and (max-width: 1020px){
+            .career {
+                padding: 32px;
+            }
+        }
+    </style>
+
+        <style>
+        .expertise {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 80px;
+        }
+        .expertise-element{
+            max-width: 1024px;
+            display: grid;
+            grid-gap: 32px;
+        }
+        @media screen and (max-width: 650px){
+            .expertise {
+                padding: 24px 80px 24px 24px;
+            }
+        }
+    </style>
+        <style>
+        .c-ExpertiseItem {
+            margin-bottom: 32px;
+        }
+        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer {
+            display: grid;
+            grid-template-columns: 90% auto;
+            grid-gap: 32px;
+            margin-bottom: 32px;
+        }
+        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer .c-ProgressBar__percentage > h3{
+            margin-bottom: 0px;
+            margin-top: -8px;
+        }
+        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer .c-ProgressBar__bottom {
+            width: 100%;
+            height: 16px;
+            background-color: rgb(var(--color-primary-dark));
+        }
+        .c-ExpertiseItem .c-ExpertiseItem__progressBarContainer .c-ProgressBar__top {
+            height: 32px;
+            margin-top: -8px;
+            background-color: rgb(var(--color-primary-light));
+            transition: width 2s;
+            width: 0%;
+        }
+    </style>
+
+
+        <style>
+        .contact {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        @media screen and (max-width: 650px) {
+            .contact {
+                min-height: max-content !important;
+                padding: 16px;
+            }
+        }
+
+        .contact-heading {
+            margin-bottom: 4rem;
+        }
+        .contact-element {
+            max-width: 1024px;
+            display: grid;
+            grid-template-columns: 30% auto;
+            grid-gap: 8px;
+        }
+        .contact-form {
+            width: auto;
+            padding: 0 32px;
+        }
+
+        @media screen and (max-width: 1020px) {
+            .contact-element {
+                display: flex;
+                flex-direction: column;
+            }
+            .contact-text {
+                margin-bottom: 4rem;
+            }
+            .contact-form {
+                padding: 0;
+            }
+        }
+
+        @media screen and (max-width: 650px){
+            .contact {
+                min-height: max-content !important;
+                padding: 16px;
+            }
+            .contact-form {
+                padding: 0;
+            }
+            .contact-text {
+                padding: 0 16px;
+            }
+        }
+    </style>
+
+        <style>
+        .form-group .btn {
+            width: 100%;
+            font-family: var(--font-family-base);
+            font-weight: var(--font-bold);
+            text-transform: uppercase;
+            color: rgb(var(--color-primary-darker));
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: inline-block;
+            padding: 0 0.5rem;
+            margin-left: 0.5rem;
+            background-color: rgb(var(--color-primary-darker));
+            font-family: var(--font-family-base);
+            color: rgb(var(--color-primary-lighter));
+            font-weight: var(--font-light);
+            position: relative;
+            top: 30px;
+            transition: top .2s ease-in-out, font-size .2s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .form-group-label-focus {
+            font-size: 80%;
+            top: 11px !important;
+        }
+
+        .form-control {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            padding-top: 0.375rem;
+            padding-bottom: 0.375rem;
+            padding-left: 0.75rem;
+            color: rgb(var(--color-primary-normal));
+            background-color: rgb(var(--color-primary-darker));
+            font-family: var(--font-family-base);
+            font-weight: var(--font-light);
+            font-size: 1rem;
+            line-height: 1.5;
+            border: 1px solid rgb(var(--color-primary-normal));
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .form-control:focus {
+            border: 1px solid rgb(var(--color-primary-lighter));
+            transition: border .2s ease-in-out;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+        }
+        .form-group button {
+            cursor: pointer;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+        .d-block {
+            display: block !important;
+        }
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-family: var(--font-family-base);
+            font-weight: var(--font-light);
+            font-size: 80%;
+            color: #dc3545;
+        }
+        .badge {
+            display: inline-block;
+            padding: .25em .4em;
+            font-family: var(--font-family-base);
+            font-weight: var(--font-light);
+            font-size: 75%;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: .25rem;
+        }
+        .badge-danger {
+            color: #fff;
+            background-color: #dc3545;
+        }
+    </style>
+
+
+</head>
+<body>
+        <header class="header-holder">
+        <div class="toggle-holder">
+            <div id="toggle" onclick="onNav()">
+                <div class="menu-line"></div>
+            </div>
+        </div>
+        <div id="menu-holder">
+            <nav class="menu-holder--points">
+                <ul>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#home">Home</a>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#hobby">Hobbys</a>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#experience">Erfahrungen</a>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#career">Werdegang</a>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#expertise">Kentnisse</a>
+                    </li>
+                    <li class="menu-item">
+                        <a onclick="onNav()" class="nav-points" href="#contact">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+            <script>
+
+    </script>
+    <style>
+        #plant-profile {
+
+            padding: 150px 50px;
+            
+        }
+
+        .infogroup {
+            display: block;
+            
+            margin-bottom: 50px ;
+        }
+
+        @media screen and (max-width: 1360px){
+            .infogroup {
+                display: none;
+            }
+        }
+    </style>
+<div id="plant-profile">
+    <div class="infogroup">
+           <p class=" prmary-color-light">NAME</p> <br> Finn Wiebesiek
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">SCHULE</p> <br> Städtisches Gymnasium <br> Porta Westfalica
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">EMAIL</p> <br>finn.wiebesiek@outlook.de
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">TELEFON</p> <br> +49 1514 3397451
+    </div>
+
+</div>
+
+       
+    </header>
+
+    <div id="content">
+            <section id="home" class="home">
+        
+            
+            <div class="name">
+            
+          
+                <center>
+                <h1 class="bold color-primary-normal"><br>Finn <br> Wiebesiek</h1>
+                </center>
+            </div>
+             
+            <div class="social-media">
+            
+             
+            
+             <div> 
+             <button class="btn btn-primary">Download</button>
+             <center>
+             <a href="https://www.instagram.com/finn.wbs/?hl=de"><p> Instagram</p> </a>
+             </center>
+             
+             
+
+             </div>
+        
+
+    </div></section>
+
+             
+    <div id="hobby" class="hobby">
+        <div class="hobby-element">
+            <div class="hobby-cards">
+                                    
+    <style>
+        .hex {
+            
+        }
+
+        .card-content {
+            
+            color: rgb(var(--color-primary-lighter));
+        }
+        
+        .hex-top {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          }
+
+        .card-content--icon {
+
+            
+            background-size:100%;
+            min-height: 70px;
+            width: 77px;
+            margin-bottom: -125px;
+            flex-shrink: 0;
+            color: rgb(var(--color-primary-lighter));
+        }
+
+        .hex-middle{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+        }
+
+        .hex-middle h3{
+            
+            margin-bottom: 10px;
+        }
+
+        .hex-middle p{
+            color: rgb(var(--color-primary-normal));
+
+        }
+
+        .inhalt {
+            width: 70%;
+            position:relative; top: 20px;
+        }
+    </style>
+
+
+    
+    <div class="hex">
+        <div class="hex-top">
+            <img class="card-content--icon" src="Praktikum_files/code.svg"> 
+        </div>
+        <div class="hex-middle">
+            <div class="inhalt">
+            <center>
+                <h3>Technik</h3>
+                <p>Ich repariere wenn ich kapute technik habe diese gerne selber und habe mir 2022 meinen eigenen Computer zusammen gebaut.</p>
+            </center>
+            </div>
+        </div>
+        <div class="hex-bottom">
+        </div>
+    </div>
+
+                                    
+    <style>
+        .hex {
+            
+        }
+
+        .card-content {
+            
+            color: rgb(var(--color-primary-lighter));
+        }
+        
+        .hex-top {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          }
+
+        .card-content--icon {
+
+            
+            background-size:100%;
+            min-height: 70px;
+            width: 77px;
+            margin-bottom: -125px;
+            flex-shrink: 0;
+            color: rgb(var(--color-primary-lighter));
+        }
+
+        .hex-middle{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+        }
+
+        .hex-middle h3{
+            
+            margin-bottom: 10px;
+        }
+
+        .hex-middle p{
+            color: rgb(var(--color-primary-normal));
+
+        }
+
+        .inhalt {
+            width: 70%;
+            position:relative; top: 20px;
+        }
+    </style>
+
+
+    
+    <div class="hex">
+        <div class="hex-top">
+            <img class="card-content--icon" src="Praktikum_files/computer.svg"> 
+        </div>
+        <div class="hex-middle">
+            <div class="inhalt">
+            <center>
+                <h3>Video Spiele</h3>
+                <p>Ich spiele am liebsten Multiplayer, Stratiegie und Taktik games mit meinen Freunden.</p>
+            </center>
+            </div>
+        </div>
+        <div class="hex-bottom">
+        </div>
+    </div>
+
+                                    
+    <style>
+        .hex {
+            
+        }
+
+        .card-content {
+            
+            color: rgb(var(--color-primary-lighter));
+        }
+        
+        .hex-top {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          }
+
+        .card-content--icon {
+
+            
+            background-size:100%;
+            min-height: 70px;
+            width: 77px;
+            margin-bottom: -125px;
+            flex-shrink: 0;
+            color: rgb(var(--color-primary-lighter));
+        }
+
+        .hex-middle{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+        }
+
+        .hex-middle h3{
+            
+            margin-bottom: 10px;
+        }
+
+        .hex-middle p{
+            color: rgb(var(--color-primary-normal));
+
+        }
+
+        .inhalt {
+            width: 70%;
+            position:relative; top: 20px;
+        }
+    </style>
+
+
+    
+    <div class="hex">
+        <div class="hex-top">
+            <img class="card-content--icon" src="Praktikum_files/football-ball.svg"> 
+        </div>
+        <div class="hex-middle">
+            <div class="inhalt">
+            <center>
+                <h3>Fußball</h3>
+                <p>In meiner Freizeit spiele ich im Ferein Fußball dabei macht mir besonders das spielem im Team spaß.  </p>
+            </center>
+            </div>
+        </div>
+        <div class="hex-bottom">
+        </div>
+    </div>
+
+                            </div>
+            <div class="hobby-text">
+            <h2>INTERESSEN <br> </h2>
+            <p>
+            Mein Name ist  Finn Wiebesiek. <br> Ich bin 17 Jahre alt und besuche <br> derzeit das Städtische <br> Gymnasium in Porta Westfalica.<br> <br>
+
+Meine Interessen liegen im <br> Informationtechnischen <br> und Mathematischen Bereich. Ich spiele Fußball und verbringe gerne Zeit mit meinen Freunden.<br> <br>
+
+Meine Abitur Fächer sind Mathe, Inflormatik, Englisch und Geschichte. Wobei ich Englisch und Mathe als Leistungs Kurse belge. 
+            </p>
+            </div>
+        </div>
+       
+
+    </div>
+
+        
+            <section id="experience" class="experience">
+        <div class="experience-element">
+            <h2>Erfahrungen</h2>
+                                <script>
+
+    </script>
+    <style>
+        .experience-content {
+            display: flex;
+            grid-gap: 32px;
+        }
+
+        .experience-content-img {
+            aspect-ratio: 4/3;
+            width: 416px;
+        }
+
+        .experience-content-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiene-content-link{
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+        }
+        .experiene-content-link img {
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 650px) {
+            .experience-content {
+                flex-direction: column;
+            }
+
+            .experience-content-img {
+                aspect-ratio: 2/1;
+            }
+        }
+    </style>
+    <div class="experience-content">
+        <img class="experience-content-img" src="Praktikum_files/code.png">
+
+        <span class="experience-content-text">
+            <h3>Praktikum - Webdesign</h3>
+            <p>2023 habe ich in einer Werbe Agentur mein 2-wöchiges Praktikum im Bereich Webdesign abgeschlossen.</p>
+                            <div class="experiene-content-link">
+                <a href="https://www.hdnet.de/">zur Website von HDNET</a>
+                </div>
+                    </span>
+    </div>
+                                <script>
+
+    </script>
+    <style>
+        .experience-content {
+            display: flex;
+            grid-gap: 32px;
+        }
+
+        .experience-content-img {
+            aspect-ratio: 4/3;
+            width: 416px;
+        }
+
+        .experience-content-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experiene-content-link{
+            display: flex;
+            height: 100%;
+            align-items: flex-end;
+        }
+        .experiene-content-link img {
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 650px) {
+            .experience-content {
+                flex-direction: column;
+            }
+
+            .experience-content-img {
+                aspect-ratio: 2/1;
+            }
+        }
+    </style>
+    <div class="experience-content">
+        <img class="experience-content-img" src="Praktikum_files/machtMathe2.jpg">
+
+        <span class="experience-content-text">
+            <h3>Teilnahme - macht mathe</h3>
+            <p>Im Dezember 2022 haben drei Klassenkammeraden und ich, am
+ macht mathe Wetbewerb teilgenommen. Bei diesem konnte ich meine 
+Fähigeiten im bereich Logisches denken und Mathematik gut in unsere 
+gruppen Arbeit einbringen. </p>
+                            <div class="experiene-content-link">
+                <a href="https://gym-pw.de/erfolgreiche-teilnahme-macht-mathe-2022-23/">zum Artikel meiner Schule</a>
+                </div>
+                    </span>
+    </div>
+            </div>
+    </section>
+
+                <section id="career" class="career">
+        <h2 class="text-uppercase">Werdegang</h2>
+        <ul class="career-element">
+                                <script>
+
+    </script>
+    <style>
+        li.timeline-event {
+            margin: 0 0 48px 64px;
+            position: relative;
+            padding-top: 8px;
+            list-style: none;
+            transition: .3s;
+        }
+
+        .timline-event-date {
+            position: absolute;
+            left: -115px;
+            top: 2px;
+            transition: .3s;
+            color: rgb(var(--color-primary-light));
+            font-weight: 700;
+        }
+
+        .timeline-event-content {
+            margin-left: 48px;
+        }
+
+        span.timeline-circle {
+            position: absolute;
+            top: 0;
+            left: -32px;
+        }
+
+        span.timeline-circle:before {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 32px;
+            border-radius: 90%;
+            border: 4px solid rgb(var(--color-primary-light));
+            position: absolute;
+            left: -16px;
+            top: 4px;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        li.timeline-event:not(:last-child):before {
+            content: "";
+            width: 4px;
+            height: calc(100% - 20px);
+            position: absolute;
+            background-color: rgb(var(--color-primary-light));
+            left: -30px;
+            top: 58px; }
+
+        li.timeline-event span.timeline-circle:after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: -8px;
+            top: 12px;
+            border-radius: 90%;
+            background-color: rgb(var(--color-primary-light));
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover span.timeline-circle:after {
+            opacity: 1;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover p {
+            color: rgb(var(--color-primary-lighter));
+            transition: color .3s ease-in-out;
+        }
+    </style>
+        <li class="timeline-event">
+            <span class="timeline-circle"></span>
+            <div> <p class="timeline-event-content"><b> 2012-2016</b>  
+ging ich in den Grundschulverbund Holzhausen-Vennebeck, dort habe ich 
+mich in diversen Arbeitsgemeinschaften eingesetzt und ein Interesse für 
+Mathematik  entwickelt. </p></div>
+            <div class="timline-event-date"> <p class="color-primary-light"> 2012 </p></div>
+        </li>
+
+                                <script>
+
+    </script>
+    <style>
+        li.timeline-event {
+            margin: 0 0 48px 64px;
+            position: relative;
+            padding-top: 8px;
+            list-style: none;
+            transition: .3s;
+        }
+
+        .timline-event-date {
+            position: absolute;
+            left: -115px;
+            top: 2px;
+            transition: .3s;
+            color: rgb(var(--color-primary-light));
+            font-weight: 700;
+        }
+
+        .timeline-event-content {
+            margin-left: 48px;
+        }
+
+        span.timeline-circle {
+            position: absolute;
+            top: 0;
+            left: -32px;
+        }
+
+        span.timeline-circle:before {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 32px;
+            border-radius: 90%;
+            border: 4px solid rgb(var(--color-primary-light));
+            position: absolute;
+            left: -16px;
+            top: 4px;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        li.timeline-event:not(:last-child):before {
+            content: "";
+            width: 4px;
+            height: calc(100% - 20px);
+            position: absolute;
+            background-color: rgb(var(--color-primary-light));
+            left: -30px;
+            top: 58px; }
+
+        li.timeline-event span.timeline-circle:after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: -8px;
+            top: 12px;
+            border-radius: 90%;
+            background-color: rgb(var(--color-primary-light));
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover span.timeline-circle:after {
+            opacity: 1;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover p {
+            color: rgb(var(--color-primary-lighter));
+            transition: color .3s ease-in-out;
+        }
+    </style>
+        <li class="timeline-event">
+            <span class="timeline-circle"></span>
+            <div> <p class="timeline-event-content"><b> 2021</b>   habe  mein Schulpraktikum bei der Ingenieurgesellchaft Kuhlmann gemacht.    </p></div>
+            <div class="timline-event-date"> <p class="color-primary-light"> 2021 </p></div>
+        </li>
+
+                                <script>
+
+    </script>
+    <style>
+        li.timeline-event {
+            margin: 0 0 48px 64px;
+            position: relative;
+            padding-top: 8px;
+            list-style: none;
+            transition: .3s;
+        }
+
+        .timline-event-date {
+            position: absolute;
+            left: -115px;
+            top: 2px;
+            transition: .3s;
+            color: rgb(var(--color-primary-light));
+            font-weight: 700;
+        }
+
+        .timeline-event-content {
+            margin-left: 48px;
+        }
+
+        span.timeline-circle {
+            position: absolute;
+            top: 0;
+            left: -32px;
+        }
+
+        span.timeline-circle:before {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 32px;
+            border-radius: 90%;
+            border: 4px solid rgb(var(--color-primary-light));
+            position: absolute;
+            left: -16px;
+            top: 4px;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        li.timeline-event:not(:last-child):before {
+            content: "";
+            width: 4px;
+            height: calc(100% - 20px);
+            position: absolute;
+            background-color: rgb(var(--color-primary-light));
+            left: -30px;
+            top: 58px; }
+
+        li.timeline-event span.timeline-circle:after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: -8px;
+            top: 12px;
+            border-radius: 90%;
+            background-color: rgb(var(--color-primary-light));
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover span.timeline-circle:after {
+            opacity: 1;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover p {
+            color: rgb(var(--color-primary-lighter));
+            transition: color .3s ease-in-out;
+        }
+    </style>
+        <li class="timeline-event">
+            <span class="timeline-circle"></span>
+            <div> <p class="timeline-event-content"><b> 2023</b>  habe 
+ich in meinen Herbstferien die Gelegenheit genutzt um ein Praktikum bei 
+HDNET zu abslovieren wo ich einen Einblick in die Front- und Backend 
+Entwicklung bekommen konnte.  </p></div>
+            <div class="timline-event-date"> <p class="color-primary-light"> 2023 </p></div>
+        </li>
+
+                                <script>
+
+    </script>
+    <style>
+        li.timeline-event {
+            margin: 0 0 48px 64px;
+            position: relative;
+            padding-top: 8px;
+            list-style: none;
+            transition: .3s;
+        }
+
+        .timline-event-date {
+            position: absolute;
+            left: -115px;
+            top: 2px;
+            transition: .3s;
+            color: rgb(var(--color-primary-light));
+            font-weight: 700;
+        }
+
+        .timeline-event-content {
+            margin-left: 48px;
+        }
+
+        span.timeline-circle {
+            position: absolute;
+            top: 0;
+            left: -32px;
+        }
+
+        span.timeline-circle:before {
+            content: "";
+            display: block;
+            width: 32px;
+            height: 32px;
+            border-radius: 90%;
+            border: 4px solid rgb(var(--color-primary-light));
+            position: absolute;
+            left: -16px;
+            top: 4px;
+            z-index: 1;
+            transition: .3s;
+        }
+
+        li.timeline-event:not(:last-child):before {
+            content: "";
+            width: 4px;
+            height: calc(100% - 20px);
+            position: absolute;
+            background-color: rgb(var(--color-primary-light));
+            left: -30px;
+            top: 58px; }
+
+        li.timeline-event span.timeline-circle:after {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            left: -8px;
+            top: 12px;
+            border-radius: 90%;
+            background-color: rgb(var(--color-primary-light));
+            opacity: 0;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover span.timeline-circle:after {
+            opacity: 1;
+            transition: opacity .3s;
+        }
+
+        li.timeline-event:hover p {
+            color: rgb(var(--color-primary-lighter));
+            transition: color .3s ease-in-out;
+        }
+    </style>
+        <li class="timeline-event">
+            <span class="timeline-circle"></span>
+            <div> <p class="timeline-event-content"><b> bis 2023</b>  
+besuche ich weiterhin das  Stätische Gymnasium Porta Westfalica, wo ich 
+voraussichtlich im Jahr 2024 mein Abitur mit den Prüfungsfächern 
+Englisch, Mathe und Informatik absolvieren werde. </p></div>
+            <div class="timline-event-date"> <p class="color-primary-light"> 2023 </p></div>
+        </li>
+
+                    </ul>
+    </section>
+
+                
+
+    <div id="expertise" class="expertise">
+        <div class="expertise-element">
+
+                                                    <div class="c-ExpertiseItem">
+        <div class="headline">
+            <h3>Englisch</h3>
+        </div>
+        <div class="c-ExpertiseItem__progressBarContainer">
+            <div class="c-ProgressBar__bottom">
+                <div class="c-ProgressBar__top js-ProgressBarTop" data-percentage="65"></div>
+            </div>
+            <div class="c-ProgressBar__percentage">
+            <p>65%</p>
+            </div>
+        </div>
+    </div>
+
+                                                                    <div class="c-ExpertiseItem">
+        <div class="headline">
+            <h3>JavaScript</h3>
+        </div>
+        <div class="c-ExpertiseItem__progressBarContainer">
+            <div class="c-ProgressBar__bottom">
+                <div class="c-ProgressBar__top js-ProgressBarTop" data-percentage="25"></div>
+            </div>
+            <div class="c-ProgressBar__percentage">
+            <p>25%</p>
+            </div>
+        </div>
+    </div>
+
+                                                                    <div class="c-ExpertiseItem">
+        <div class="headline">
+            <h3>SQL</h3>
+        </div>
+        <div class="c-ExpertiseItem__progressBarContainer">
+            <div class="c-ProgressBar__bottom">
+                <div class="c-ProgressBar__top js-ProgressBarTop" data-percentage="60"></div>
+            </div>
+            <div class="c-ProgressBar__percentage">
+            <p>60%</p>
+            </div>
+        </div>
+    </div>
+
+                                                                    <div class="c-ExpertiseItem">
+        <div class="headline">
+            <h3>Fitness</h3>
+        </div>
+        <div class="c-ExpertiseItem__progressBarContainer">
+            <div class="c-ProgressBar__bottom">
+                <div class="c-ProgressBar__top js-ProgressBarTop" data-percentage="70"></div>
+            </div>
+            <div class="c-ProgressBar__percentage">
+            <p>70%</p>
+            </div>
+        </div>
+    </div>
+
+                                        
+
+        </div>
+    </div>
+
+        <section id="contact" class="contact">
+    <h2 class="bold color-primary-light contact-heading">KONTAKT</h2>
+    <div class="contact-element">
+        <span class="contact-text">
+            <p class="light color-primary-normal">
+                Bei Fragen oder Problemen können sie hier einfach mit mir kontakt aufnehemen.
+            </p>
+        </span>
+        <span id="form" class="contact-form">
+                        <form name="contact" method="post"><div id="contact"><div class="form-group"><label for="contact_name" class="required">Name</label><input type="text" id="contact_name" name="contact[name]" required="required" class="form-control"></div><div class="form-group"><label for="contact_email" class="required">Email</label><input type="email" id="contact_email" name="contact[email]" required="required" class="form-control"></div><div class="form-group"><label for="contact_subject" class="required">Betreff</label><input type="text" id="contact_subject" name="contact[subject]" required="required" class="form-control"></div><div class="form-group"><label for="contact_message" class="required">Nachricht</label><textarea id="contact_message" name="contact[message]" required="required" class="form-control"></textarea></div><div class="form-group"><button type="submit" id="contact_Senden" name="contact[Senden]" class="btn-primary btn">Nachricht senden</button></div><input type="hidden" id="contact__token" name="contact[_token]" value="a2fdceea58aa5b3e086f831bfa.edfzn38jWTuS7TiFHDp9w86O8pC2khp5WMSFrnP8WZk.G6XA8jl1DVe_v1_RSm0KqJvCqvHS83NBaYPDmBuLHNgI4JCuSlpqT9_ZeQ"></div></form>
+                
+                                    </span>
+    </div>
+</section>
+
+    </div>
+
+
+</body></html>

@@ -1,0 +1,54 @@
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
+{% block style %}
+    <style>
+        .career {
+            background-color: rgb(var(--color-primary-darker));
+            padding: 80px;
+        }
+
+        ul.career-element {
+            max-width: 1024px;
+            margin: 0;
+            padding: 0 0 0 64px;
+            -webkit-transform: translateZ(0);
+        }
+
+        @media screen and (max-width: 1020px){
+            .career {
+                padding: 32px;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% set career = [
+        {'date': '2012',
+            'contentDate': '2012-2016',
+            'content': 'ging ich in den Grundschulverbund Holzhausen-Vennebeck, dort habe ich mich in diversen Arbeitsgemeinschaften eingesetzt und ein Interesse für Mathematik  entwickelt.',
+        },
+        {'date': '2021',
+            'contentDate': '2021',
+            'content': ' habe  mein Schulpraktikum bei der Ingenieurgesellchaft Kuhlmann gemacht.   ',
+        },
+        {'date': '2023',
+            'contentDate': '2023',
+            'content': 'habe ich in meinen Herbstferien die Gelegenheit genutzt um ein Praktikum bei HDNET zu abslovieren wo ich einen Einblick in die Front- und Backend Entwicklung bekommen konnte. ',
+        },
+        {'date': '2023',
+            'contentDate': 'bis 2023',
+            'content': 'besuche ich weiterhin das  Stätische Gymnasium Porta Westfalica, wo ich voraussichtlich im Jahr 2024 mein Abitur mit den Prüfungsfächern Englisch, Mathe und Informatik absolvieren werde.',
+        },
+    ] %}
+    <section id="career" class="career">
+        <h2 class="text-uppercase">Werdegang</h2>
+        <ul class="career-element">
+            {% for item in career %}
+                {% include 'components/career/timeline.html.twig' %}
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

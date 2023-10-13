@@ -1,0 +1,43 @@
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock %}
+{% block style %}
+    <style>
+        #plant-profile {
+
+            padding: 150px 50px;
+            
+        }
+
+        .infogroup {
+            display: block;
+            
+            margin-bottom: 50px ;
+        }
+
+        @media screen and (max-width: 1360px){
+            .infogroup {
+                display: none;
+            }
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div id="plant-profile">
+    <div class="infogroup">
+           <p class=" prmary-color-light">NAME</p> <br> Finn Wiebesiek
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">SCHULE</p> <br> Städtisches Gymnasium <br> Porta Westfalica
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">EMAIL</p> <br>finn.wiebesiek@outlook.de
+    </div>
+    <div class="infogroup">
+           <p class=" prmary-color-light">TELEFON</p> <br> +49 1514 3397451
+    </div>
+
+</div>
+{% endblock %}
