@@ -186,7 +186,7 @@ class BackendController extends AbstractController
         // check if file with filename exists
         /*
          * Der Service Filesystem spiegelt unser Dateisystem auf dem Rechner/ Server wider. Mithilfe des Filesystems
-         * können wir überprüfen, ob die Datei überhaupt existiert. Dazu verwende die Funktion 'exist' der du den
+         * können wir überprüfen, ob die Datei überhaupt existiert. Dazu verwende die Funktion 'exists' der du den
          * filename übergibst.
          *
          * Das Ergebnis wird in einer If-Bedingung überprüft.
